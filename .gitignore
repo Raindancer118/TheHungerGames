@@ -1,0 +1,29 @@
+# Gradle
+.gradle/
+build/
+gradle/
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
+gradlew
+gradlew.bat
+
+# IDE
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Binary files
+bin/
+*.class
+*.jar
+
+# Environment
+.env
+.DS_Store
+
+
+# Projekt-Notizen (lokal)
+Project.md
+.idea/
+.serena/

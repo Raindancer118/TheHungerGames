@@ -1,0 +1,130 @@
+# This file introduces different configuration options for the hungergames plugin.
+
+# === GAME SETTINGS ===
+# Countdown till start (seconds)
+countdown: 10
+# Change the time period during which the worldborder shrinks here (seconds)
+shrinktime: 500
+# Change the game duration here (minutes)
+gameduration: 120
+# Preparation Time (percentage of gameduration) - After this time, the worldborder will start moving
+preptime: 30
+# Grace period - period of time players will be invulnerable after game start (seconds)
+graceperiod: 10
+
+# === SERVER ADMIN ===
+# Players who can join before /init is executed (comma-separated)
+# These are the only players allowed on the server during NOT_INITIALIZED phase
+pre-init-admins: Raindancer118
+
+# === ARENA SETTINGS ===
+arena:
+  # Worldborder size in blocks (applied to both Overworld and Nether)
+  worldborder-size: 2500
+  # Minimum gap between platforms in blocks
+  platform-min-gap: 6
+  # Platform schematic width (used for radius calculation)
+  platform-width: 3
+
+# === LOBBY SETTINGS ===
+lobby:
+  # Height above arena center where lobby spawns
+  height-offset: 100
+  # Lobby glass box dimensions (width x depth)
+  width: 20
+  depth: 20
+  # Lobby height (interior space)
+  height: 5
+  # Glass block type for lobby walls
+  block-type: GLASS
+
+# === PORTAL SETTINGS ===
+portals:
+  # Whether to block nether portals in arena area
+  block-nether-portals: true
+  # Radius around arena center where nether portals are ALLOWED (if enabled). Portals outside this radius in the Overworld are blocked.
+  nether-allow-radius: 20
+  # Whether to block end portals completely
+  block-end-portals: true
+
+# === PROTECTION SETTINGS ===
+protection:
+  # Whether to enable protection for the central area at all
+  enabled: false
+  # Radius around arena center where building/breaking is disabled for normal players
+  schematic-radius: 20
+  # Whether to protect chests (meaning they cannot be broken or placed if true)
+  protect-chests: false
+  # Permission to bypass protection
+  bypass-permission: gamemaster
+  # Interactions allowed within the protected radius for normal players
+  allowed-interactions:
+    - CHEST
+    - TRAPPED_CHEST
+    - ENDER_CHEST
+    - BARREL
+    - SHULKER_BOX
+
+# === DIFFICULTY ===
+# Game difficulty during preflight/lobby phase (PEACEFUL, EASY, NORMAL, HARD)
+preflight-difficulty: PEACEFUL
+
+# === UNDERGROUND ROOM SETTINGS ===
+underground-room:
+  # Height of the underground room interior (in blocks)
+  # This is the circular quartz room where tubes lead to
+  height: 5
+  # Extra radius beyond the platform circle (in blocks)
+  # The room will extend this far past the outermost platforms
+  extra-radius: 5
+  # Depth of the tubes (starting from platform level downwards)
+  # Used if schematic height cannot be determined
+  tube-depth: 12
+
+# === STARTUP SETTINGS ===
+startup:
+  # Delay between redstone lamps turning on (ticks, 20 = 1 second)
+  lamp-delay: 5
+  # Delay before levitation starts after lamps are done (ticks)
+  levitation-start-delay: 40
+  # Delay between each player receiving levitation (ticks)
+  player-levitation-delay: 10
+  # Levitation effect amplifier (0 = slow, higher = faster)
+  levitation-amplifier: 2
+  # Height offset for underground spawn positions (below arena center)
+  underground-height-offset: 16
+
+# === LOOT SETTINGS ===
+loot:
+  # Radius around arena center to scan for containers to fill
+  scan-radius: 50
+  # Vertical range (up/down from arena center) to scan for containers
+  scan-y-range: 30
+
+# === CUSTOM ITEMS ===
+items:
+  fiendfinder:
+    # Duration of glowing effect applied to the revealed enemy (seconds)
+    glow-duration: 15
+    # Search radius for finding enemies (blocks) - 0 for unlimited
+    search-radius: 50
+
+# === RUNNING PHASE SETTINGS ===
+running:
+  # Action on player death: KICK or BAN
+  death-action: KICK
+
+# === WORLDBORDER SHRINKING ===
+worldborder:
+  # Countdown warnings before first shrink (minutes before prep phase ends)
+  prep-warnings: [10, 5, 3, 2, 1]
+  # Number of shrink cycles during the game (interval is auto-calculated)
+  shrink-count: 5
+  # Final worldborder size (blocks) - the border shrinks to this size
+  final-size: 100
+  # Final time period (percentage of game duration) - time spent at final size
+  final-time-percent: 15
+  # Duration of each shrink (seconds)
+  shrink-duration: 60
+  # Warning time before each shrink (seconds)
+  shrink-warning: 30

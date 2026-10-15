@@ -1,0 +1,14 @@
+# Whitelist configuration for HungerGames tournament
+# Add player names with their team number
+# Team partners will be placed next to each other on platforms
+# This will be replaced by API endpoint in the future
+
+players:
+  - name: ExamplePlayer1
+    team: 1
+  - name: ExamplePlayer2
+    team: 1
+  - name: ExamplePlayer3
+    team: 2
+  - name: ExamplePlayer4
+    team: 2

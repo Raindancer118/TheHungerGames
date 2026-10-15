@@ -1,0 +1,100 @@
+name: HungerGames
+version: 2.0.0
+main: com.hungergames.HungerGamesPlugin
+description: Die Tribute von Panem in Minecraft — mit Teams, Spectator-System und öffentlicher API.
+author: Raindancer118
+contributors: [Raindancer118, TeddyBear2004]
+website: https://Raindancer118.de
+api-version: '26.2'
+load: POSTWORLD
+depend:
+  - WorldEdit
+
+permissions:
+  hungergames.gamemaster:
+    description: Spiel starten/beenden und Phasen wechseln.
+    default: op
+  hungergames.admin:
+    description: Konfiguration, Whitelist, Teams und Wiederbelebung verwalten.
+    default: op
+  hungergames.protection.bypass:
+    description: Umgeht den Gebietsschutz der Cornucopia.
+    default: op
+  # Legacy-Alias aus v0.16 — bitte auf hungergames.gamemaster umstellen
+  gamemaster:
+    description: "Veraltet: Alias für hungergames.gamemaster."
+    default: op
+    children:
+      hungergames.gamemaster: true
+
+commands:
+  hg:
+    description: "HungerGames: Admin-GUI, Spielmacher, Deathmatch, Drops, Sponsoren, Loot, Teams, Config"
+    usage: "/hg [admin|gm|deathmatch|supplydrop|sponsor|loot|team|config|whitelist|revive|border|spectate|status]"
+
+  start:
+    description: "Startet die Spiele"
+    usage: "/start"
+    aliases: [st]
+    permission: hungergames.gamemaster
+    permission-message: "Nur der Spielleiter darf die Spiele eröffnen!"
+
+  init:
+    description: "Initialisiert die Arena an deiner Position"
+    usage: "/init"
+    permission: hungergames.gamemaster
+    permission-message: "Nur der Spielleiter darf die Arena errichten!"
+
+  startup:
+    description: "Startsequenz: Tribute in die Röhren und nach oben"
+    usage: "/startup"
+    permission: hungergames.gamemaster
+    permission-message: "Nur der Spielleiter darf die Startsequenz auslösen!"
+
+  test-start:
+    description: "Testmodus betreten (Spectator mit Gamemode-Wechsel)"
+    usage: "/test-start"
+    permission: hungergames.gamemaster
+    permission-message: "Nur der Spielleiter darf den Testmodus nutzen!"
+
+  test-end:
+    description: "Testmodus verlassen"
+    usage: "/test-end"
+    permission: hungergames.gamemaster
+    permission-message: "Nur der Spielleiter darf den Testmodus nutzen!"
+
+  config-reload:
+    description: "loot.yml neu laden und Server-Whitelist aktualisieren"
+    usage: "/config-reload"
+    permission: hungergames.gamemaster
+    permission-message: "Nur der Spielleiter darf neu laden!"
+
+  hg-reload:
+    description: "loot.yml neu laden"
+    usage: "/hg-reload"
+    permission: hungergames.gamemaster
+    permission-message: "Nur der Spielleiter darf neu laden!"
+
+  test-loot:
+    description: "Loot-Generierung manuell auslösen (Test)"
+    usage: "/test-loot"
+    permission: hungergames.gamemaster
+    permission-message: "Nur der Spielleiter darf das!"
+
+  fliptable:
+    description: "GEFAHR: Alle Welten löschen, Daten zurücksetzen, Server neu starten"
+    usage: "/fliptable confirm"
+    permission: op
+    permission-message: "Nur Server-Operatoren dürfen das!"
+
+  speedup:
+    description: "Spielzeit beschleunigen (Test), z. B. /speedup 4"
+    usage: "/speedup <Faktor|off>"
+    permission: hungergames.gamemaster
+    permission-message: "Nur der Spielleiter darf die Zeit beschleunigen!"
+
+  allow:
+    description: "Spieler zur Server-Whitelist hinzufügen (ohne OP)"
+    usage: "/allow <Spielername>"
+    permission: op
+    permission-message: "Nur Server-Operatoren dürfen das!"

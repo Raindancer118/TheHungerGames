@@ -1,0 +1,65 @@
+REGELN
+
+#1 - Projektregeln & Informationen
+1. Verwende bereits implementierte Funktionen und Bibliotheken, anstatt neue zu schreiben. Wenn nötig, passe bestehende Funktionen an, anstatt neue zu erstellen.
+2. Neue Features müssen mindestens folgendes beinhalten:
+    a. Dokumentation im Ordner documentation/features/
+    b. Ausführliche Kommentare im Code
+    c. Ausführliche Tests mit Testcases, die die Funktionalität sicherstellen und auch edge cases abdecken. Tests sollten die abstrusesten Möglichkeiten testen und auch Fälle abdecken wie SQL Injection zb.
+3. Wenn bestehende Features angepasst werden, müssen die Tests und die Dokumentation ebenfalls angepasst werden.
+4. Nutze bitte die Dokumentationen im Ordner documentation/ als Referenz und Einarbeitung.
+5. Wenn Änderungen vorgenommen werden, die bestimmten Code unnötig machen / du feststellst, dass Code unnötig ist und/oder nicht verwendet wird, bitte räume auf und lösche im Zweifel Code und / oder alte Dateien.
+6. Verändere keine bestehenden Features, die nichts mit der aktuellen Aufgabe zu tun haben, außer es ist notwendig, um die anderen Regeln einzuhalten und die Aufgabe zu erfüllen.
+7. Wenn du irgendwelche Werte hast, bitte nicht hardcoden. Nutze die config.yml dafür und füge Werte hinzu bzw nutze bereits vorhandene.
+
+
+#2 - Security
+1. Vertraue niemals externen Daten (Zero Trust Input)
+Jeder Datenpunkt, der nicht von deinem eigenen Code festgeschrieben wurde, ist potenziell feindselig. Das gilt für Formularfelder, URL-Parameter, HTTP-Header, Datenbankeinträge und sogar Daten von internen Microservices.
+
+Aktion: Validieren (stimmt der Typ?), Sanitizen (entferne gefährliche Zeichen) und Typisierung erzwingen.
+
+2. Das Prinzip der geringsten Berechtigung (Least Privilege)
+Jeder Teil deines Systems (User, Prozess, Datenbank-User, API-Schlüssel) sollte nur genau die Rechte haben, die er für seine Aufgabe zwingend benötigt – und keinen Deut mehr.
+
+Aktion: Nutze niemals den root-User für deine App, gib Datenbank-Usern nur Zugriff auf spezifische Tabellen und verwende zeitlich begrenzte Token statt permanenter Passwörter.
+
+3. Trenne Geheimnisse strikt vom Code
+Code ist dazu da, geteilt, versioniert und gelesen zu werden. Geheimnisse (API-Keys, DB-Passwörter, Zertifikate) sind das Gegenteil.
+
+Aktion: Hardcoding ist absolut verboten. Nutze Umgebungsvariablen (.env) für die Entwicklung und professionelle Secret-Management-Systeme (wie Vault oder AWS Secrets Manager) für die Produktion.
+
+4. Kryptografie: Nutze Standards, erfinde nichts selbst
+Sicherheit durch Verschleierung (Security by Obscurity) funktioniert nicht. Ein eigener Verschlüsselungsalgorithmus ist niemals sicher.
+
+Aktion: Nutze bewährte Bibliotheken für Hashing (z. B. Argon2 oder bcrypt für Passwörter) und verschlüssele Daten im Ruhezustand (at rest) und bei der Übertragung (in transit via TLS/HTTPS).
+
+5. Defense in Depth (Mehrschichtige Sicherheit)
+Verlasse dich niemals auf eine einzige Sicherheitsmaßnahme. Wenn die Firewall fällt, muss die App-Authentifizierung halten. Wenn die Authentifizierung versagt, muss die Datenbank-Verschlüsselung schützen.
+
+Aktion: Baue Sicherheitsbarrieren auf Netzwerk-Ebene, Applikations-Ebene und Daten-Ebene auf.
+
+6. Sichere Defaults (Secure by Default)
+Ein System sollte im Auslieferungszustand so sicher wie möglich sein. Sicherheit sollte keine Option sein, die man erst aktivieren muss.
+
+Aktion: Deaktiviere alle unnötigen Features, Ports und Standard-Passwörter. Setze Sicherheits-Header (HSTS, CSP) standardmäßig aktiv.
+
+7. Kenne deine Abhängigkeiten (Supply Chain Security)
+Moderne Software besteht zu 80 % aus fremden Bibliotheken (NPM, PyPI, NuGet). Du bist dafür verantwortlich, dass diese Pakete keine Backdoors enthalten.
+
+Aktion: Führe regelmäßig automatisierte Scans durch (npm audit, Snyk), pinne Versionen und minimiere die Anzahl der genutzten Abhängigkeiten.
+
+8. Fail Securely (Sicheres Scheitern)
+Wenn eine Anwendung abstürzt oder einen Fehler wirft, darf sie dabei keine sensiblen Informationen preisgeben (z. B. Stack-Traces oder Datenbank-Strukturen im Browser).
+
+Aktion: Implementiere ein globales Error-Handling, das dem User nur eine neutrale Fehlermeldung zeigt, aber im Hintergrund detaillierte Logs für die Entwickler schreibt.
+
+9. Unveränderliche Audit-Logs
+Du musst jederzeit beantworten können: Wer hat was wann getan? Ohne Logs bist du bei einem Einbruch blind.
+
+Aktion: Protokolliere alle sicherheitsrelevanten Ereignisse (Logins, Passwortänderungen, Admin-Aktionen) zentral und schütze diese Logs vor nachträglicher Manipulation.
+
+10. Patchen ist Pflicht
+Die meisten erfolgreichen Angriffe nutzen Sicherheitslücken aus, für die es bereits seit Monaten Patches gibt.
+
+Aktion: Automatisiere Updates für das Betriebssystem, Docker-Images und Frameworks. Veraltete Software ist das größte Sicherheitsrisiko.
