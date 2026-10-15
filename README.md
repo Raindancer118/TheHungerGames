@@ -708,3 +708,5 @@ Details: [`docs/Architecture.md`](docs/Architecture.md) (Zielbild und Migrations
 ---
 
 **Autor:** [Raindancer118](https://github.com/Raindancer118) · Mitwirkende: TeddyBear2004
+
+**Lizenz:** © 2025-2026 Raindancer118 und Mitwirkende. Alle Rechte vorbehalten – siehe [LICENSE](LICENSE).
